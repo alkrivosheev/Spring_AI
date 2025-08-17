@@ -11,6 +11,7 @@
     <groupId>org.jeka</groupId>
     <artifactId>borisov-gpt</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <name>borisov-gpt</name>
     <description>spring_ai_and_rag</description>
     <url/>
@@ -20,6 +21,9 @@
     <developers>
         <developer/>
     </developers>
+    <modules>
+        <module>demo2</module>
+    </modules>
     <scm>
         <connection/>
         <developerConnection/>

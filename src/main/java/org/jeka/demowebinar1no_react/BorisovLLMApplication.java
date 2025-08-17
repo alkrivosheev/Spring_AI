@@ -17,7 +17,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class BorisovLLMApplication {
+public class  BorisovLLMApplication {
 
     private static final PromptTemplate MY_PROMPT_TEMPLATE = new PromptTemplate(
             "{query}\n\n" +
