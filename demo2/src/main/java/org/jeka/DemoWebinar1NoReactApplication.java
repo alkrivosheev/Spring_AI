@@ -15,6 +15,6 @@ public class DemoWebinar1NoReactApplication {
 
     public static void main(String[] args) {
         ChatClient chatClient = SpringApplication.run(DemoWebinar1NoReactApplication.class, args).getBean("chatClient", ChatClient.class);
-        System.out.println(chatClient.prompt().user("Социни сказку про Турна Клапауция из созвездия Омеги 4. Который мог путешествовать по звездам со скоростью света").call().content());
+//        System.out.println(chatClient.prompt().user("Расскажи, что тако джет у черной дыры").call().content());
     }
 }

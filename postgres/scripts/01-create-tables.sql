@@ -25,7 +25,13 @@ CREATE TABLE public.chat_entry (
 
 ALTER TABLE public.chat_entry OWNER TO postgres;
 
-
+-- Таблица chat_history (связующая таблица)
+CREATE TABLE chat_history (
+                              chat_id BIGINT NOT NULL,
+                              history_id BIGINT NOT NULL,
+                              PRIMARY KEY (chat_id, history_id),
+                              FOREIGN KEY (history_id) REFERENCES chat_entry(id)
+);
 
 
 -- =============================================
