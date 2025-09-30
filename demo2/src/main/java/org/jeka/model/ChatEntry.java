@@ -21,11 +21,12 @@ public class ChatEntry {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-     private String content;
+    @Column(columnDefinition = "TEXT")
+    private String content;
 
-     @Enumerated(EnumType.STRING)
-     private Role role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-     @CreationTimestamp
-     private LocalDateTime createdAt;
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 }

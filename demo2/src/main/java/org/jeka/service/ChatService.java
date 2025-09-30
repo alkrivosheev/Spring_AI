@@ -1,6 +1,5 @@
 package org.jeka.service;
 
-import lombok.extern.slf4j.Slf4j;
 import org.jeka.model.Chat;
 import org.jeka.model.ChatEntry;
 import org.jeka.model.Role;
@@ -17,7 +16,6 @@ import static org.jeka.model.Role.ASSISTANT;
 import static org.jeka.model.Role.USER;
 
 @Service
-@Slf4j
 public class ChatService {
     @Autowired
     private ChatRepository chatRepository;
@@ -25,15 +23,15 @@ public class ChatService {
     @Autowired
     private ChatClient chatClient;
 
-//    @Autowired
-//    private ChatService myProxy;
+    @Autowired
+    private ChatService myProxy;
 
     public List<Chat> getAllChats() {
         return chatRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
     }
 
     public Chat getChat(Long chatId) {
-    return chatRepository.findById(chatId).orElseThrow();
+        return chatRepository.findById(chatId).orElseThrow();
     }
 
     public Chat createNewChat(String title) {
@@ -47,31 +45,15 @@ public class ChatService {
 
     @Transactional
     public void proceedInteraction(Long chatId, String prompt) {
-        log.info("Starting proceedInteraction for chatId: {}, prompt: {}", chatId, prompt);
-
-        addChatEntry(chatId, prompt, USER);
-        log.info("User message saved");
-
+        myProxy.addChatEntry(chatId, prompt, USER);
         String answer = chatClient.prompt().user(prompt).call().content();
-        log.info("AI response received: {}", answer);
-
-        addChatEntry(chatId, answer, ASSISTANT);
-        log.info("Assistant message saved");
+        myProxy.addChatEntry(chatId, answer, ASSISTANT);
     }
 
     @Transactional
-    public void addChatEntry(Long chatId, String content, Role role) {
-        log.info("Adding chat entry - chatId: {}, role: {}, content: {}", chatId, role, content);
-
+    public void addChatEntry(Long chatId, String prompt, Role role) {
         Chat chat = chatRepository.findById(chatId).orElseThrow();
-        ChatEntry entry = ChatEntry.builder()
-                .content(content)
-                .role(role)
-                .build();
-
-        chat.addChatEntry(entry);
-        Chat savedChat = chatRepository.save(chat);
-
-        log.info("Chat saved with ID: {}, entries count: {}", savedChat.getId(), savedChat.getHistory().size());
+        chat.addChatEntry(ChatEntry.builder().content(prompt).role(role).build());
     }
+
 }

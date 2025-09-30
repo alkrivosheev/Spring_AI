@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/chat.css}"/>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <!-- Закомментируйте или удалите эту строку -->
-    <!-- <script defer th:src="@{/js/chat.js}"></script> -->
+<!--    <script defer th:src="@{/js/chat.js}"></script>-->
 </head>
 <body class="comic-body">
 <div class="chat-container">
@@ -62,7 +62,8 @@
                     <label for="chat-input" class="sr-only">Спрашивай</label>
                     <textarea id="chat-input" name="prompt" placeholder="Спрашивай..." required></textarea>
                     <!-- ИСПРАВЛЕНИЕ: type="submit" -->
-                    <button type="submit" id="send-button">SEND</button>
+<!--                    <button type="button" id="send-button">SEND</button>-->
+                     <button type="submit" id="send-button">SEND</button>
                 </div>
             </form>
         </div>
